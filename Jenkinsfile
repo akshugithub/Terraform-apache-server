@@ -14,8 +14,9 @@ pipeline {
       stage('Deploy'){
              steps{
                  
-		   sh 'ansible aws_ec2 -i aws_ec2.yaml -m ping --ssh-common-args="-o StrictHostKeyChecking=no" -u ubuntu --private-key=/var/lib/jenkins/keypair.pem'
-		   sh 'ansible-playbook Deploy.yml -i aws_ec2.yaml --ssh-common-args="-o StrictHostKeyChecking=no" -u ubuntu --private-key=/home/ubuntu/keypair.pem'
+		   sh 'ansible aws_ec2 -i dynamicinventory.yaml -m ping --ssh-common-args="-o StrictHostKeyChecking=no" -u ubuntu --private-key=/var/lib/jenkins/mykeypair.pem'
+		   sh 'ansible-playbook deployment.yaml -i dynamicinventory.yaml --ssh-common-args="-o StrictHostKeyChecking=no" -u ubuntu --private-key=/home/ubuntu/mykeypair.pem'
 		  
           }
        }            
+	   }
