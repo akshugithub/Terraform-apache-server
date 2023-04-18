@@ -1,0 +1,43 @@
+---
+- name: remove artifact file
+  file:
+    path: "{{ tmp_repo }}"
+    state: absent
+- name: Install PIP3
+  apt: 
+    name: python3-pip 
+    state: present
+- name: Install lxml
+  pip: 
+    name: lxml
+# - name: Nexus Artifact deploy
+#   maven_artifact:
+#     group_id: pl.codeleak.demos.sbt
+#     artifact_id: spring-boot-thymeleaf
+#     extension: war
+#     version: 2.0.0
+#     repository_url: "{{ deploy_url }}"
+#     username: admin
+#     password: admin
+# Intergrating ansible_vault here for credentials
+#    username: nexus_username
+ #   password: nexus_password
+#     dest: "{{ tmp_repo }}"
+#     mode: '0755'
+- name: remove artifact file in latest tomcat
+  file:
+    path: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
+    state: absent
+- name: Deploy in tomcat
+  copy:
+#   src: /tmp/spring-boot-thymeleaf-2.0.0.war
+#   dest: /opt/tomcat/latest/webapps/spring-boot-thymeleaf-2.0.0.war
+    src:  /var/lib/jenkins/tmp/demo-2.0.0-SNAPSHOT.war
+    dest: "{{ tomcat_latest }}/webapps/{{ deploy_file_name }}"
+    mode: '0755'
+    owner: tomcat
+    group: tomcat
+    force: true
+#     remote_src: true
+  notify:
+    - reload the daemon, enable and start the tomcat service
