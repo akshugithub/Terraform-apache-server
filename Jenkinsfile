@@ -5,6 +5,17 @@ pipeline {
            }
     
            stages {
+		   
+      stage('terraform build') {
+            steps{
+                   sh "mvn clean package"
+		   sh "terraform --version"
+		   sh "terraform init"
+		   sh "terraform fmt" 
+		   sh "terraform plan"
+		   sh "terraform apply --auto-approve"
+	          }
+		}		   
       stage('GIT checkout') {
            steps {
              git branch: 'main', url: 'https://github.com/akshugithub/Terraform-apache-server.git'
@@ -20,3 +31,4 @@ pipeline {
           }
        }            
 	   }
+}
