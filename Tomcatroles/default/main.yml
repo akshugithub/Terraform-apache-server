@@ -25,5 +25,5 @@ tomcat_allow_context_locations:
 deploy_version: 2.0.0-SNAPSHOT
 deploy_file_name: demo-{{ deploy_version }}.war
 # deploy_url: http://13.233.100.229:8081/repository/ansible/
-# deploy_url: http://65.0.12.16:8081/repository/demo/   
+deploy_url: http://52.194.244.68:8081/repository/demo/   
 tmp_repo: /tmp/{{ deploy_file_name }}
