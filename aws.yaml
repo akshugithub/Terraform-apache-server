@@ -4,6 +4,6 @@ regions:
 ansible_user: ubuntu
 filters:
   instance-state-name: running
-  # All instances with their 'name` tag set to `my-ec2-instance`
+  # All instances with their 'name` tag set to `apache-server`
   tag:Name:
-     - my-ec2-instance
+     - apache-server
